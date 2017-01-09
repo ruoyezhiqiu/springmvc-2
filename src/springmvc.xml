@@ -30,8 +30,23 @@
 			WEB 服务器的默认 Servlet 名称不是 default，则需要通过 default-
 			servlet-name 属性显式指定
 	-->
-	<mvc:default-servlet-handler/>
-	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:default-servlet-handler/><!-- 解决：处理静态资源 -->
+	<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
 	
+	
+	<!-- 此处配置自定义类型转换器，需要将以下类型转换器的id指定给：annotation-driven标签的 conversion-service属性-->
+	<!-- 配置ConversionService:利用 FormattingConversionServiceFactoryBean,即可实现自定义类型转换，也可使用格式化注解：如：@DateTimeFormat、@NumberFormat -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<ref bean="employeeConverter"/>
+			</set>
+		</property>
+	</bean>
+	
+	<!-- 配置国际化资源文件 -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="i18n"></property>
+	</bean>
 	
 </beans>

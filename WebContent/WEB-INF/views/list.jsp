@@ -62,7 +62,7 @@
 	</c:if>
 	
 	<br><br>
-	<a href="emp">Add New Employee</a>
+	<a href="emp">添加新员工</a>
 	
 </body>
 </html>
