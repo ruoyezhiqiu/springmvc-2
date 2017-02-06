@@ -49,4 +49,18 @@
 		<property name="basename" value="i18n"></property>
 	</bean>
 	
+	<!-- 配置直接跳转：不需要经过handler方法直接页面跳转 注：需与mvc:annotation-driven标签连用 -->
+	<mvc:view-controller path="/i18n" view-name="i18n"/>
+	<mvc:view-controller path="/i18n2" view-name="i18n2"/>
+	
+	<!-- 配置自定义拦截器：FirstInterceptor -->
+	<mvc:interceptors>
+		<bean class="com.wushengde.springmvc.interceptors.FirstInterceptor"></bean>
+		
+		<!-- 配置拦截器(或者是不作用)作用的路径 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/emps"/>
+			<bean class="com.wushengde.springmvc.interceptors.SecondInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

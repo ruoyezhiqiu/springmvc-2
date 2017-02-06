@@ -38,5 +38,8 @@
 	<br><br>
 	<p>演示文件下载：</p><br><br>
 	<a href="testResponseEntity">下载</a>
+	
+	<br><br>
+	<a href="i18n">I18N page</a>
 </body>
 </html>

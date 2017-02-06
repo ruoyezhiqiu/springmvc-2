@@ -28,6 +28,14 @@ public class SpringmvcTest {
 	private EmployeeDao employeeDao;
 	
 	
+	//测试springMVC异常处理
+	@RequestMapping("/testExceptionHandlerExceptionResolver")
+	public String testExceptionHandlerExceptionResolver(@RequestParam("i") int i){
+		System.out.println("result: " + (10/i));
+		return "success";
+	}
+	
+	
 	//演示文件下载：
 	@RequestMapping("/testResponseEntity")
 	public ResponseEntity<byte[]> testResponseEntity(HttpSession session) throws IOException{
@@ -64,6 +72,7 @@ public class SpringmvcTest {
 	}
 	
 	
+	//测试自定义类型转换
 	@RequestMapping("/testConversionServiceConverer")
 	public String testConverter(@RequestParam("employee") Employee employee){
 		System.out.println("save: "+employee);
