@@ -13,10 +13,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.wushengde.springmvc.crud.dao.EmployeeDao;
 import com.wushengde.springmvc.crud.entities.Employee;
@@ -26,6 +28,28 @@ public class SpringmvcTest {
 
 	@Autowired
 	private EmployeeDao employeeDao;
+	
+	
+	@ExceptionHandler(RuntimeException.class)
+	public ModelAndView handleArithmeticException2(Exception ex){
+		System.out.println("[出异常了]： "+ ex);
+		ModelAndView mv=new ModelAndView("error");
+		mv.addObject("exception",ex);
+		return mv;
+	}
+	
+	/**
+	 *  1.在@ExceptionHandler 方法的入参中可以加入Exception 类型的参数，该参数就是对应的发生的异常对象
+	 *  2.@ExceptionHandler 方法的入参不能传入 Map 如果希望将异常带到页面，需要使用ModelAndView 作为返回类型
+	 *  
+	 */
+	@ExceptionHandler(ArithmeticException.class)
+	public ModelAndView handleArithmeticException(Exception ex){
+		System.out.println("出异常了： "+ ex);
+		ModelAndView mv=new ModelAndView("error");
+		mv.addObject("exception",ex);
+		return mv;
+	}
 	
 	
 	//测试springMVC异常处理
